@@ -5,12 +5,6 @@ import com.bw.combatsample.model.bean.Lawyer;
 
 public interface IHomeContract {
 
-    //m层通知p层结果用的
-    interface IModelCallback {
-        void onHomeSuccess(Lawyer lawyer);
-
-        void onHomeFailure(Throwable throwable);
-    }
 
     //p层通知v层用的
     interface IView {
@@ -19,5 +13,19 @@ public interface IHomeContract {
         void onHomeFailure(Throwable throwable);
     }
 
+    interface IPresenter {
+        void getHomeData();
+    }
+
+    interface IModel {
+        void getHomeData(IModelCallback iModelCallback);
+
+        //m层通知p层结果用的
+        interface IModelCallback {
+            void onHomeSuccess(Lawyer lawyer);
+
+            void onHomeFailure(Throwable throwable);
+        }
+    }
 
 }
