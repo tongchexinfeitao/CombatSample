@@ -1,181 +1,102 @@
 package com.bw.combatsample.util;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bw.combatsample.App;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NetUtil {
-    private static NetUtil netUtil = new NetUtil();
+
+
+    private final RequestQueue requestQueue;
 
     private NetUtil() {
+        requestQueue = Volley.newRequestQueue(App.app);
     }
 
-    //geti
+    private static NetUtil netUtil;
+
+    // TODO: 2019/12/4 双重校验锁       线程安全的懒汉式
     public static NetUtil getInstance() {
+        if (netUtil == null) {
+            synchronized (NetUtil.class) {
+                if (netUtil == null) {
+                    netUtil = new NetUtil();
+                }
+            }
+        }
+
         return netUtil;
     }
 
-    //请求json
-    @SuppressLint("StaticFieldLeak")
-    public void getJson(final String httpUrl, final MyCallback myCallback) {
-        new AsyncTask<Void, Void, String>() {
+    public void getJsonGet(String httpUrl, final MyCallback myCallback) {
+        StringRequest stringRequest = new StringRequest(httpUrl, new Response.Listener<String>() {
             @Override
-            protected void onPostExecute(String s) {
-                // TODO: 2019/11/20 先写主线程
-                if (TextUtils.isEmpty(s)) {
-                    myCallback.onError(new Exception("请求失败"));
-                } else {
-                    myCallback.onGetJson(s);
-                }
+            public void onResponse(String response) {
+                myCallback.onGetJson(response);
             }
-
+        }, new Response.ErrorListener() {
             @Override
-            protected String doInBackground(Void... voids) {
-                InputStream inputStream = null;
-                String json = "";
-                try {
-                    URL url = new URL(httpUrl);
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setRequestMethod("GET");
-                    httpURLConnection.setReadTimeout(5000);
-                    httpURLConnection.setConnectTimeout(5000);
-                    httpURLConnection.connect();
-                    if (httpURLConnection.getResponseCode() == 200) {
-                        inputStream = httpURLConnection.getInputStream();
-                        json = io2String(inputStream);
-                    } else {
-                        Log.e("TAG", "请求失败");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    if (inputStream != null) {
-                        try {
-                            inputStream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                // TODO: 2019/11/20 必须返回
-                return json;
+            public void onErrorResponse(VolleyError error) {
+                myCallback.onError(error);
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        });
+        // TODO: 2019/12/4 必须添加队列，才会执行
+        requestQueue.add(stringRequest);
     }
 
-
-    //io2String
-    public String io2String(InputStream inputStream) throws IOException {
-        byte[] bytes = new byte[1024];
-        int len = -1;
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        while ((len = inputStream.read(bytes)) != -1) {
-            byteArrayOutputStream.write(bytes, 0, len);
-        }
-        byte[] bytes1 = byteArrayOutputStream.toByteArray();
-        String json = new String(bytes1);
-        return json;
-    }
-
-    //请求图片
-    @SuppressLint("StaticFieldLeak")
-    public void getPhoto(final String photoUrl, final ImageView imageView) {
-        new AsyncTask<Void, Void, Bitmap>() {
+    public void getJsonPost(String httpUrl, final Map<String, String> map, final MyCallback myCallback) {
+        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, httpUrl, new Response.Listener<String>() {
             @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                imageView.setImageBitmap(bitmap);
+            public void onResponse(String response) {
+                myCallback.onGetJson(response);
             }
-
+        }, new Response.ErrorListener() {
             @Override
-            protected Bitmap doInBackground(Void... voids) {
-                InputStream inputStream = null;
-                Bitmap bitmap = null;
-                try {
-                    URL url = new URL(photoUrl);
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setRequestMethod("GET");
-                    httpURLConnection.setReadTimeout(5000);
-                    httpURLConnection.setConnectTimeout(5000);
-                    httpURLConnection.connect();
-                    if (httpURLConnection.getResponseCode() == 200) {
-                        inputStream = httpURLConnection.getInputStream();
-                        bitmap = io2Bitmap(inputStream);
-                    } else {
-                        Log.e("TAG", "请求失败");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    if (inputStream != null) {
-                        try {
-                            inputStream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                // TODO: 2019/11/20 必须返回
-                return bitmap;
+            public void onErrorResponse(VolleyError error) {
+                myCallback.onError(error);
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return map;
+            }
+        };
+        // TODO: 2019/12/4 必须添加
+        requestQueue.add(stringRequest);
     }
 
-    //io2Bitmap
-    public Bitmap io2Bitmap(InputStream inputStream) {
-        return BitmapFactory.decodeStream(inputStream);
+    // TODO: 2019/12/4    new   new  添加
+    public void getPhoto(String photoUrl, final ImageView imageView) {
+        ImageRequest imageRequest = new ImageRequest(photoUrl, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                imageView.setImageBitmap(response);
+            }
+        }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("TAG", "请求图片失败");
+            }
+        });
+        requestQueue.add(imageRequest);
     }
 
-    //是否有网
-    public boolean hasNet(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetworkInfo != null && activeNetworkInfo.isAvailable()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //是否是Wifi
-    public boolean isWifi(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetworkInfo != null && activeNetworkInfo.isAvailable() && activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //是否是Mobile
-    public boolean isMobile(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetworkInfo != null && activeNetworkInfo.isAvailable() && activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //接口
-    public interface MyCallback {
+   public interface MyCallback {
         void onGetJson(String json);
 
         void onError(Throwable throwable);
     }
-
 }

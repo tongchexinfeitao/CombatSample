@@ -6,9 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.HomeActivity">
 
-    <GridView
-        android:id="@+id/gv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="3"></GridView>
+    <Button
+        android:id="@+id/btn_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
 </RelativeLayout>
