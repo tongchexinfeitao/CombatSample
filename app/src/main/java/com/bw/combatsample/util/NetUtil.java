@@ -5,7 +5,6 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -14,21 +13,17 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bw.combatsample.App;
 
-import java.util.HashMap;
+
 import java.util.Map;
 
 public class NetUtil {
-
-
+    private static NetUtil netUtil;
     private final RequestQueue requestQueue;
 
     private NetUtil() {
         requestQueue = Volley.newRequestQueue(App.app);
     }
 
-    private static NetUtil netUtil;
-
-    // TODO: 2019/12/4 双重校验锁       线程安全的懒汉式
     public static NetUtil getInstance() {
         if (netUtil == null) {
             synchronized (NetUtil.class) {
@@ -36,13 +31,13 @@ public class NetUtil {
                     netUtil = new NetUtil();
                 }
             }
-        }
 
+        }
         return netUtil;
     }
 
     public void getJsonGet(String httpUrl, final MyCallback myCallback) {
-        StringRequest stringRequest = new StringRequest(httpUrl, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, httpUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 myCallback.onGetJson(response);
@@ -53,7 +48,6 @@ public class NetUtil {
                 myCallback.onError(error);
             }
         });
-        // TODO: 2019/12/4 必须添加队列，才会执行
         requestQueue.add(stringRequest);
     }
 
@@ -74,11 +68,13 @@ public class NetUtil {
                 return map;
             }
         };
-        // TODO: 2019/12/4 必须添加
         requestQueue.add(stringRequest);
     }
 
-    // TODO: 2019/12/4    new   new  添加
+
+    /**
+     * 有可能用Glide代替，那么就不用写了
+     */
     public void getPhoto(String photoUrl, final ImageView imageView) {
         ImageRequest imageRequest = new ImageRequest(photoUrl, new Response.Listener<Bitmap>() {
             @Override
@@ -88,15 +84,19 @@ public class NetUtil {
         }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("TAG", "请求图片失败");
+                Log.e("TAG", "图片请求失败");
             }
         });
         requestQueue.add(imageRequest);
     }
 
-   public interface MyCallback {
+
+    public interface MyCallback {
         void onGetJson(String json);
 
         void onError(Throwable throwable);
     }
+
+    //三个方法判断是否有网、wifi、mobile
+
 }
