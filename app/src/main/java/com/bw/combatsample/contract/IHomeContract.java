@@ -1,6 +1,7 @@
 package com.bw.combatsample.contract;
 
 
+import com.bw.combatsample.model.bean.BannerBean;
 import com.bw.combatsample.model.bean.Lawyer;
 
 public interface IHomeContract {
@@ -11,6 +12,11 @@ public interface IHomeContract {
         void onHomeSuccess(Lawyer lawyer);
 
         void onHomeFailure(Throwable throwable);
+
+
+        void onBannerSuccess(BannerBean bannerBean);
+
+        void onBannerFailure(Throwable throwable);
     }
 
     interface IPresenter {
@@ -25,6 +31,10 @@ public interface IHomeContract {
             void onHomeSuccess(Lawyer lawyer);
 
             void onHomeFailure(Throwable throwable);
+
+            void onBannerSuccess(BannerBean bannerBean);
+
+            void onBannerFailure(Throwable throwable);
         }
     }
 

@@ -5,168 +5,348 @@ import java.util.List;
 public class Lawyer {
 
     /**
-     * code : 200
-     * bannerdata : [{"imageUrl":"http://blog.zhaoliang5156.cn/api/images/01.jpg"},{"imageUrl":"http://blog.zhaoliang5156.cn/api/images/02.jpg"},{"imageUrl":"http://blog.zhaoliang5156.cn/api/images/03.jpg"},{"imageUrl":"http://blog.zhaoliang5156.cn/api/images/01.jpg"}]
-     * listdata : [{"name":"张海霞","info":"专业-婚姻家庭","avatar":"http://blog.zhaoliang5156.cn/api/images/head1.jpeg","url":"https://www.sina.com.cn/","content":"请问实习律师到法院开庭要穿律师袍吗？","publishedAt":"11:10","type":1,"share":2,"collection":2,"fabulous":2,"comment":2},{"name":"张海霞","info":"专业-婚姻家庭","avatar":"http://blog.zhaoliang5156.cn/api/images/head2.jpeg","url":"https://www.sina.com.cn/","content":"请问实习律师到法院开庭要穿律师袍吗？","publishedAt":"11:12","type":2,"share":3,"collection":3,"fabulous":3,"comment":3},{"name":"张海霞","info":"专业-婚姻家庭","avatar":"http://blog.zhaoliang5156.cn/api/images/head3.jpg","url":"https://www.sina.com.cn/","content":"请问实习律师到法院开庭要穿律师袍吗？","publishedAt":"11:14","type":1,"share":4,"collection":4,"fabulous":4,"comment":4}]
+     * result : {"rxxp":{"commodityList":[{"commodityId":27,"commodityName":"休闲马衔扣保暖绒里棉鞋懒人鞋毛毛鞋平底女雪地靴女短靴子豆豆鞋女鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/ddx/3/1.jpg","price":139,"saleNum":10},{"commodityId":21,"commodityName":"【加绒休闲 舒适轻便】秋冬增高休闲鞋厚底棉鞋运动户外通勤简约韩版女鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/bx/4/1.jpg","price":189,"saleNum":10},{"commodityId":5,"commodityName":"双头两用修容笔","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/3/1.jpg","price":39,"saleNum":309}],"id":1002,"name":"热销新品"},"pzsh":{"commodityList":[{"commodityId":6,"commodityName":"轻柔系自然裸妆假睫毛","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/4/1.jpg","price":39,"saleNum":104},{"commodityId":15,"commodityName":"玻儿精灵美妆蛋一个","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/mzgj/5/1.jpg","price":6,"saleNum":28},{"commodityId":7,"commodityName":"蓝色之恋","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/5/1.jpg","price":29,"saleNum":23},{"commodityId":3,"commodityName":"Lara style女神的魔盒全套彩妆","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/1/1.jpg","price":3499,"saleNum":2002}],"id":1004,"name":"品质生活"},"mlss":{"commodityList":[{"commodityId":32,"commodityName":"唐狮女鞋冬季女鞋休闲鞋子女士女鞋百搭帆布鞋女士休闲鞋子女款板鞋休闲女鞋帆布鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/fbx/1/1.jpg","price":88,"saleNum":4},{"commodityId":18,"commodityName":"白色经典 秋季新款简约百搭轻便休闲女鞋板鞋小白鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/bx/1/1.jpg","price":79,"saleNum":1}],"id":1003,"name":"魔力时尚"}}
+     * message : 查询成功
+     * status : 0000
      */
 
-    private String code;
-    private List<BannerdataBean> bannerdata;
-    private List<ListdataBean> listdata;
+    private ResultBean result;
+    private String message;
+    private String status;
 
-    public String getCode() {
-        return code;
+    public ResultBean getResult() {
+        return result;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setResult(ResultBean result) {
+        this.result = result;
     }
 
-    public List<BannerdataBean> getBannerdata() {
-        return bannerdata;
+    public String getMessage() {
+        return message;
     }
 
-    public void setBannerdata(List<BannerdataBean> bannerdata) {
-        this.bannerdata = bannerdata;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public List<ListdataBean> getListdata() {
-        return listdata;
+    public String getStatus() {
+        return status;
     }
 
-    public void setListdata(List<ListdataBean> listdata) {
-        this.listdata = listdata;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public static class BannerdataBean {
+    public static class ResultBean {
         /**
-         * imageUrl : http://blog.zhaoliang5156.cn/api/images/01.jpg
+         * rxxp : {"commodityList":[{"commodityId":27,"commodityName":"休闲马衔扣保暖绒里棉鞋懒人鞋毛毛鞋平底女雪地靴女短靴子豆豆鞋女鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/ddx/3/1.jpg","price":139,"saleNum":10},{"commodityId":21,"commodityName":"【加绒休闲 舒适轻便】秋冬增高休闲鞋厚底棉鞋运动户外通勤简约韩版女鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/bx/4/1.jpg","price":189,"saleNum":10},{"commodityId":5,"commodityName":"双头两用修容笔","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/3/1.jpg","price":39,"saleNum":309}],"id":1002,"name":"热销新品"}
+         * pzsh : {"commodityList":[{"commodityId":6,"commodityName":"轻柔系自然裸妆假睫毛","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/4/1.jpg","price":39,"saleNum":104},{"commodityId":15,"commodityName":"玻儿精灵美妆蛋一个","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/mzgj/5/1.jpg","price":6,"saleNum":28},{"commodityId":7,"commodityName":"蓝色之恋","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/5/1.jpg","price":29,"saleNum":23},{"commodityId":3,"commodityName":"Lara style女神的魔盒全套彩妆","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/1/1.jpg","price":3499,"saleNum":2002}],"id":1004,"name":"品质生活"}
+         * mlss : {"commodityList":[{"commodityId":32,"commodityName":"唐狮女鞋冬季女鞋休闲鞋子女士女鞋百搭帆布鞋女士休闲鞋子女款板鞋休闲女鞋帆布鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/fbx/1/1.jpg","price":88,"saleNum":4},{"commodityId":18,"commodityName":"白色经典 秋季新款简约百搭轻便休闲女鞋板鞋小白鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/bx/1/1.jpg","price":79,"saleNum":1}],"id":1003,"name":"魔力时尚"}
          */
 
-        private String imageUrl;
+        private RxxpBean rxxp;
+        private PzshBean pzsh;
+        private MlssBean mlss;
 
-        public String getImageUrl() {
-            return imageUrl;
+        public RxxpBean getRxxp() {
+            return rxxp;
         }
 
-        public void setImageUrl(String imageUrl) {
-            this.imageUrl = imageUrl;
-        }
-    }
-
-    public static class ListdataBean {
-        /**
-         * name : 张海霞
-         * info : 专业-婚姻家庭
-         * avatar : http://blog.zhaoliang5156.cn/api/images/head1.jpeg
-         * url : https://www.sina.com.cn/
-         * content : 请问实习律师到法院开庭要穿律师袍吗？
-         * publishedAt : 11:10
-         * type : 1
-         * share : 2
-         * collection : 2
-         * fabulous : 2
-         * comment : 2
-         */
-
-        private String name;
-        private String info;
-        private String avatar;
-        private String url;
-        private String content;
-        private String publishedAt;
-        private int type;
-        private int share;
-        private int collection;
-        private int fabulous;
-        private int comment;
-
-        public String getName() {
-            return name;
+        public void setRxxp(RxxpBean rxxp) {
+            this.rxxp = rxxp;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public PzshBean getPzsh() {
+            return pzsh;
         }
 
-        public String getInfo() {
-            return info;
+        public void setPzsh(PzshBean pzsh) {
+            this.pzsh = pzsh;
         }
 
-        public void setInfo(String info) {
-            this.info = info;
+        public MlssBean getMlss() {
+            return mlss;
         }
 
-        public String getAvatar() {
-            return avatar;
+        public void setMlss(MlssBean mlss) {
+            this.mlss = mlss;
         }
 
-        public void setAvatar(String avatar) {
-            this.avatar = avatar;
+        public static class RxxpBean {
+            /**
+             * commodityList : [{"commodityId":27,"commodityName":"休闲马衔扣保暖绒里棉鞋懒人鞋毛毛鞋平底女雪地靴女短靴子豆豆鞋女鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/ddx/3/1.jpg","price":139,"saleNum":10},{"commodityId":21,"commodityName":"【加绒休闲 舒适轻便】秋冬增高休闲鞋厚底棉鞋运动户外通勤简约韩版女鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/bx/4/1.jpg","price":189,"saleNum":10},{"commodityId":5,"commodityName":"双头两用修容笔","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/3/1.jpg","price":39,"saleNum":309}]
+             * id : 1002
+             * name : 热销新品
+             */
+
+            private int id;
+            private String name;
+            private List<CommodityListBean> commodityList;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public List<CommodityListBean> getCommodityList() {
+                return commodityList;
+            }
+
+            public void setCommodityList(List<CommodityListBean> commodityList) {
+                this.commodityList = commodityList;
+            }
+
+            public static class CommodityListBean {
+                /**
+                 * commodityId : 27
+                 * commodityName : 休闲马衔扣保暖绒里棉鞋懒人鞋毛毛鞋平底女雪地靴女短靴子豆豆鞋女鞋
+                 * masterPic : http://172.17.8.100/images/small/commodity/nx/ddx/3/1.jpg
+                 * price : 139
+                 * saleNum : 10
+                 */
+
+                private int commodityId;
+                private String commodityName;
+                private String masterPic;
+                private int price;
+                private int saleNum;
+
+                public int getCommodityId() {
+                    return commodityId;
+                }
+
+                public void setCommodityId(int commodityId) {
+                    this.commodityId = commodityId;
+                }
+
+                public String getCommodityName() {
+                    return commodityName;
+                }
+
+                public void setCommodityName(String commodityName) {
+                    this.commodityName = commodityName;
+                }
+
+                public String getMasterPic() {
+                    return masterPic;
+                }
+
+                public void setMasterPic(String masterPic) {
+                    this.masterPic = masterPic;
+                }
+
+                public int getPrice() {
+                    return price;
+                }
+
+                public void setPrice(int price) {
+                    this.price = price;
+                }
+
+                public int getSaleNum() {
+                    return saleNum;
+                }
+
+                public void setSaleNum(int saleNum) {
+                    this.saleNum = saleNum;
+                }
+            }
         }
 
-        public String getUrl() {
-            return url;
+        public static class PzshBean {
+            /**
+             * commodityList : [{"commodityId":6,"commodityName":"轻柔系自然裸妆假睫毛","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/4/1.jpg","price":39,"saleNum":104},{"commodityId":15,"commodityName":"玻儿精灵美妆蛋一个","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/mzgj/5/1.jpg","price":6,"saleNum":28},{"commodityId":7,"commodityName":"蓝色之恋","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/5/1.jpg","price":29,"saleNum":23},{"commodityId":3,"commodityName":"Lara style女神的魔盒全套彩妆","masterPic":"http://172.17.8.100/images/small/commodity/mzhf/cz/1/1.jpg","price":3499,"saleNum":2002}]
+             * id : 1004
+             * name : 品质生活
+             */
+
+            private int id;
+            private String name;
+            private List<CommodityListBeanX> commodityList;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public List<CommodityListBeanX> getCommodityList() {
+                return commodityList;
+            }
+
+            public void setCommodityList(List<CommodityListBeanX> commodityList) {
+                this.commodityList = commodityList;
+            }
+
+            public static class CommodityListBeanX {
+                /**
+                 * commodityId : 6
+                 * commodityName : 轻柔系自然裸妆假睫毛
+                 * masterPic : http://172.17.8.100/images/small/commodity/mzhf/cz/4/1.jpg
+                 * price : 39
+                 * saleNum : 104
+                 */
+
+                private int commodityId;
+                private String commodityName;
+                private String masterPic;
+                private int price;
+                private int saleNum;
+
+                public int getCommodityId() {
+                    return commodityId;
+                }
+
+                public void setCommodityId(int commodityId) {
+                    this.commodityId = commodityId;
+                }
+
+                public String getCommodityName() {
+                    return commodityName;
+                }
+
+                public void setCommodityName(String commodityName) {
+                    this.commodityName = commodityName;
+                }
+
+                public String getMasterPic() {
+                    return masterPic;
+                }
+
+                public void setMasterPic(String masterPic) {
+                    this.masterPic = masterPic;
+                }
+
+                public int getPrice() {
+                    return price;
+                }
+
+                public void setPrice(int price) {
+                    this.price = price;
+                }
+
+                public int getSaleNum() {
+                    return saleNum;
+                }
+
+                public void setSaleNum(int saleNum) {
+                    this.saleNum = saleNum;
+                }
+            }
         }
 
-        public void setUrl(String url) {
-            this.url = url;
-        }
+        public static class MlssBean {
+            /**
+             * commodityList : [{"commodityId":32,"commodityName":"唐狮女鞋冬季女鞋休闲鞋子女士女鞋百搭帆布鞋女士休闲鞋子女款板鞋休闲女鞋帆布鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/fbx/1/1.jpg","price":88,"saleNum":4},{"commodityId":18,"commodityName":"白色经典 秋季新款简约百搭轻便休闲女鞋板鞋小白鞋","masterPic":"http://172.17.8.100/images/small/commodity/nx/bx/1/1.jpg","price":79,"saleNum":1}]
+             * id : 1003
+             * name : 魔力时尚
+             */
 
-        public String getContent() {
-            return content;
-        }
+            private int id;
+            private String name;
+            private List<CommodityListBeanXX> commodityList;
 
-        public void setContent(String content) {
-            this.content = content;
-        }
+            public int getId() {
+                return id;
+            }
 
-        public String getPublishedAt() {
-            return publishedAt;
-        }
+            public void setId(int id) {
+                this.id = id;
+            }
 
-        public void setPublishedAt(String publishedAt) {
-            this.publishedAt = publishedAt;
-        }
+            public String getName() {
+                return name;
+            }
 
-        public int getType() {
-            return type;
-        }
+            public void setName(String name) {
+                this.name = name;
+            }
 
-        public void setType(int type) {
-            this.type = type;
-        }
+            public List<CommodityListBeanXX> getCommodityList() {
+                return commodityList;
+            }
 
-        public int getShare() {
-            return share;
-        }
+            public void setCommodityList(List<CommodityListBeanXX> commodityList) {
+                this.commodityList = commodityList;
+            }
 
-        public void setShare(int share) {
-            this.share = share;
-        }
+            public static class CommodityListBeanXX {
+                /**
+                 * commodityId : 32
+                 * commodityName : 唐狮女鞋冬季女鞋休闲鞋子女士女鞋百搭帆布鞋女士休闲鞋子女款板鞋休闲女鞋帆布鞋
+                 * masterPic : http://172.17.8.100/images/small/commodity/nx/fbx/1/1.jpg
+                 * price : 88
+                 * saleNum : 4
+                 */
 
-        public int getCollection() {
-            return collection;
-        }
+                private int commodityId;
+                private String commodityName;
+                private String masterPic;
+                private int price;
+                private int saleNum;
 
-        public void setCollection(int collection) {
-            this.collection = collection;
-        }
+                public int getCommodityId() {
+                    return commodityId;
+                }
 
-        public int getFabulous() {
-            return fabulous;
-        }
+                public void setCommodityId(int commodityId) {
+                    this.commodityId = commodityId;
+                }
 
-        public void setFabulous(int fabulous) {
-            this.fabulous = fabulous;
-        }
+                public String getCommodityName() {
+                    return commodityName;
+                }
 
-        public int getComment() {
-            return comment;
-        }
+                public void setCommodityName(String commodityName) {
+                    this.commodityName = commodityName;
+                }
 
-        public void setComment(int comment) {
-            this.comment = comment;
+                public String getMasterPic() {
+                    return masterPic;
+                }
+
+                public void setMasterPic(String masterPic) {
+                    this.masterPic = masterPic;
+                }
+
+                public int getPrice() {
+                    return price;
+                }
+
+                public void setPrice(int price) {
+                    this.price = price;
+                }
+
+                public int getSaleNum() {
+                    return saleNum;
+                }
+
+                public void setSaleNum(int saleNum) {
+                    this.saleNum = saleNum;
+                }
+            }
         }
     }
 }

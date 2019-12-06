@@ -1,24 +1,33 @@
 package com.bw.combatsample.view.activity;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.bw.combatsample.R;
 import com.bw.combatsample.base.BaseActivity;
 import com.bw.combatsample.contract.IHomeContract;
+import com.bw.combatsample.model.bean.BannerBean;
 import com.bw.combatsample.model.bean.Lawyer;
 import com.bw.combatsample.presenter.HomePresenter;
+import com.bw.combatsample.util.NetUtil;
+import com.bw.combatsample.view.adapter.MyMlssAdapter;
+import com.bw.combatsample.view.adapter.MyPzshAdapter;
+import com.bw.combatsample.view.adapter.MyRxxpAdapter;
+import com.stx.xhb.xbanner.XBanner;
+
+import java.util.List;
 
 public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeContract.IView {
 
 
-    private View button;
-    private ImageView imageView;
+    private RecyclerView recyclerViewRxxp;
+    private RecyclerView recyclerViewMlss;
+    private RecyclerView recyclerViewPzsh;
+    private XBanner xBanner;
 
     @Override
     protected HomePresenter providePresenter() {
@@ -27,30 +36,15 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
 
     @Override
     protected void initData() {
+        mPresenter.getHomeData();
     }
 
     @Override
     protected void initView() {
-        button = findViewById(R.id.btn_request);
-        imageView = findViewById(R.id.img);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String photoUrl = "http://blog.zhaoliang5156.cn/api/images/01.jpg";
-                Glide.with(HomeActivity.this).load(photoUrl)
-                        //默认的展位图
-                        .placeholder(R.mipmap.ic_launcher)
-                        //请求错误显示的图片
-                        .error(R.mipmap.ic_launcher_round)
-                        //磁盘缓存策略
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        //设置圆形图片
-                        //.apply(RequestOptions.bitmapTransform(new CircleCrop()))
-                        //设置圆角图片
-                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(80)))
-                        .into(imageView);
-            }
-        });
+        xBanner = findViewById(R.id.xbanner);
+        recyclerViewRxxp = findViewById(R.id.recycler_rxxp);
+        recyclerViewMlss = findViewById(R.id.recycler_mlss);
+        recyclerViewPzsh = findViewById(R.id.recycler_pzsh);
     }
 
     @Override
@@ -61,11 +55,50 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
 
     @Override
     public void onHomeSuccess(Lawyer lawyer) {
-        Toast.makeText(HomeActivity.this, "请求到了数据" + lawyer.getCode(), Toast.LENGTH_SHORT).show();
+        List<Lawyer.ResultBean.RxxpBean.CommodityListBean> rxxp = lawyer.getResult().getRxxp().getCommodityList();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerViewRxxp.setLayoutManager(linearLayoutManager);
+        recyclerViewRxxp.setAdapter(new MyRxxpAdapter(rxxp));
+
+
+
+
+        List<Lawyer.ResultBean.MlssBean.CommodityListBeanXX> mlss = lawyer.getResult().getMlss().getCommodityList();
+        LinearLayoutManager mlssLinearLayoutManager = new LinearLayoutManager(this);
+        mlssLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewMlss.setLayoutManager(mlssLinearLayoutManager);
+        recyclerViewMlss.setAdapter(new MyMlssAdapter(mlss));
+
+
+        List<Lawyer.ResultBean.PzshBean.CommodityListBeanX> pzsh = lawyer.getResult().getPzsh().getCommodityList();
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        recyclerViewPzsh.setLayoutManager(gridLayoutManager);
+        recyclerViewPzsh.setAdapter(new MyPzshAdapter(pzsh));
+
     }
 
     @Override
     public void onHomeFailure(Throwable throwable) {
         Toast.makeText(HomeActivity.this, "请求失败" + throwable.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBannerSuccess(BannerBean bannerBean) {
+        final List<BannerBean.ResultBean> result = bannerBean.getResult();
+        xBanner.setBannerData(result);
+        xBanner.loadImage(new XBanner.XBannerAdapter() {
+            @Override
+            public void loadBanner(XBanner banner, Object model, View view, int position) {
+                NetUtil.getInstance().getPhoto(result.get(position).getImageUrl(), (ImageView)view);
+            }
+        });
+    }
+
+    @Override
+    public void onBannerFailure(Throwable throwable) {
+        Toast.makeText(HomeActivity.this, "banner请求失败" + throwable.toString(), Toast.LENGTH_SHORT).show();
+
     }
 }

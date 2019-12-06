@@ -11,7 +11,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.bw.combatsample.App;
+import com.bw.combatsample.R;
+import com.bw.combatsample.view.activity.HomeActivity;
 
 
 import java.util.Map;
@@ -76,18 +82,18 @@ public class NetUtil {
      * 有可能用Glide代替，那么就不用写了
      */
     public void getPhoto(String photoUrl, final ImageView imageView) {
-        ImageRequest imageRequest = new ImageRequest(photoUrl, new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                imageView.setImageBitmap(response);
-            }
-        }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("TAG", "图片请求失败");
-            }
-        });
-        requestQueue.add(imageRequest);
+        Glide.with(imageView).load(photoUrl)
+                //默认的展位图
+                .placeholder(R.mipmap.ic_launcher)
+                //请求错误显示的图片
+                .error(R.mipmap.ic_launcher_round)
+                //磁盘缓存策略
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                //设置圆形图片
+                //.apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                //设置圆角图片
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(80)))
+                .into(imageView);
     }
 
 
