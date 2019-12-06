@@ -25,6 +25,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //Gson依赖
     implementation 'com.google.code.gson:gson:2.4'
 
     //Volley依赖
@@ -34,9 +36,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
-//    RecyclerView依赖
+    //RecyclerView依赖
     implementation 'com.android.support:recyclerview-v7:28.0.0'
 
-    //XBanner普通版本依赖
+    //XBanner普通版本依赖一
     implementation 'com.github.xiaohaibin:XBanner:1.7.0'
 }
