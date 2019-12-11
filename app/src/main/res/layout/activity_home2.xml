@@ -13,9 +13,12 @@
         android:orientation="vertical">
 
         <com.bw.combatsample.view.widget.MyTitleView
+            app:searchEnable="true"
+            app:myTextColor="@color/colorAccent"
             android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.bw.combatsample.view.widget.MyTitleView>
+            android:layout_height="wrap_content"
+            app:myHint="红米"></com.bw.combatsample.view.widget.MyTitleView>
 
         <com.bw.combatsample.view.widget.FlowLayout
             android:id="@+id/flow"

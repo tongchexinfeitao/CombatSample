@@ -2,6 +2,8 @@
 <resources>
     <declare-styleable name="MyTitleView">
         <attr name="myHint" format="string" />
-        <attr name="myBackgoundColor" format="color" />
-    </declare-styleable>
+        <attr name="myTextColor" format="color" />
+        <attr name="searchEnable" format="boolean" />
+
+     </declare-styleable>
 </resources>

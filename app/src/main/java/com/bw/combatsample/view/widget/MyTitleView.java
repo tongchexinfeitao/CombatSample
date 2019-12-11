@@ -2,6 +2,8 @@ package com.bw.combatsample.view.widget;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
@@ -59,13 +61,21 @@ public class MyTitleView extends RelativeLayout {
                 }
             }
         });
-    }
 
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyTitleView);
 
-    //当true显示搜索框，当false显示标题栏，默认是显示标题
-    public void setSearchEnable(boolean searchEnable) {
-        if (searchEnable) {
+        String string = typedArray.getString(R.styleable.MyTitleView_myHint);
+        editText.setHint(string);
+
+        int color = typedArray.getColor(R.styleable.MyTitleView_myTextColor, Color.BLACK);
+        editText.setTextColor(color);
+
+        boolean aBoolean = typedArray.getBoolean(R.styleable.MyTitleView_searchEnable, false);
+        //如果为true，显示搜索
+        if (aBoolean) {
+            //标题隐藏
             title.setVisibility(GONE);
+            //搜索相关的两个控件显示
             editText.setVisibility(VISIBLE);
             goSearch.setVisibility(VISIBLE);
         } else {
@@ -73,7 +83,9 @@ public class MyTitleView extends RelativeLayout {
             editText.setVisibility(GONE);
             goSearch.setVisibility(GONE);
         }
+
     }
+
 
     OnSearchListener onSearchListener;
 

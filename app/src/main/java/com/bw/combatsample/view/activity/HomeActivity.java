@@ -46,9 +46,6 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
     @Override
     protected void initView() {
         myTitleView = findViewById(R.id.search);
-        //支持搜索
-        myTitleView.setSearchEnable(false);
-
         myTitleView.setOnSearchListener(new MyTitleView.OnSearchListener() {
             @Override
             public void onSearch(String searchContent) {

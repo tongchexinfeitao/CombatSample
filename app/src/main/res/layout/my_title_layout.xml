@@ -17,12 +17,12 @@
         android:text="@string/app_name" />
 
     <EditText
-        android:layout_toLeftOf="@id/tv_go_search"
-        android:layout_toRightOf="@id/img_back"
         android:id="@+id/edt_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:layout_toLeftOf="@id/tv_go_search"
+        android:layout_toRightOf="@id/img_back" int="华为P30"
         android:visibility="gone" />
 
     <TextView
