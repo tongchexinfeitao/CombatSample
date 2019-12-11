@@ -59,4 +59,9 @@ public class MyPzshAdapter extends RecyclerView.Adapter<MyPzshAdapter.MyViewHold
             price = itemView.findViewById(R.id.tv_price);
         }
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
 }

@@ -17,6 +17,8 @@ import com.bw.combatsample.util.NetUtil;
 import com.bw.combatsample.view.adapter.MyMlssAdapter;
 import com.bw.combatsample.view.adapter.MyPzshAdapter;
 import com.bw.combatsample.view.adapter.MyRxxpAdapter;
+import com.bw.combatsample.view.widget.FlowLayout;
+import com.bw.combatsample.view.widget.MyTitleView;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.List;
@@ -28,6 +30,8 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
     private RecyclerView recyclerViewMlss;
     private RecyclerView recyclerViewPzsh;
     private XBanner xBanner;
+    private FlowLayout flowLayout;
+    private MyTitleView mySearchView;
 
     @Override
     protected HomePresenter providePresenter() {
@@ -41,6 +45,46 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
 
     @Override
     protected void initView() {
+        mySearchView = findViewById(R.id.search);
+        //支持搜索
+        mySearchView.setSearchEnable(false);
+
+        mySearchView.setOnSearchListener(new MyTitleView.OnSearchListener() {
+            @Override
+            public void onSearch(String searchContent) {
+                Toast.makeText(HomeActivity.this, searchContent, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        flowLayout = findViewById(R.id.flow);
+        flowLayout.setOnTagClickListener(new FlowLayout.onTagClickListener() {
+            @Override
+            public void onTagClick(String tag) {
+                Toast.makeText(HomeActivity.this, tag, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        flowLayout.setOnTagLongClickListener(new FlowLayout.onTagLongClickListener() {
+            @Override
+            public void onTagLongClick(String tag) {
+                Toast.makeText(HomeActivity.this, "删除了" + tag, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        //动态添加一个标签
+        flowLayout.addTag("肖申克的救赎");
+        flowLayout.addTag("阿甘正传");
+        flowLayout.addTag("狂怒");
+        flowLayout.addTag("肖申克的救赎");
+        flowLayout.addTag("肖申克的救赎");
+        flowLayout.addTag("肖申克的救赎");
+        flowLayout.addTag("肖申克的救赎");
+        flowLayout.addTag("敢死队");
+
+
         xBanner = findViewById(R.id.xbanner);
         recyclerViewRxxp = findViewById(R.id.recycler_rxxp);
         recyclerViewMlss = findViewById(R.id.recycler_mlss);
@@ -60,8 +104,6 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerViewRxxp.setLayoutManager(linearLayoutManager);
         recyclerViewRxxp.setAdapter(new MyRxxpAdapter(rxxp));
-
-
 
 
         List<Lawyer.ResultBean.MlssBean.CommodityListBeanXX> mlss = lawyer.getResult().getMlss().getCommodityList();
@@ -91,7 +133,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
         xBanner.loadImage(new XBanner.XBannerAdapter() {
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
-                NetUtil.getInstance().getPhoto(result.get(position).getImageUrl(), (ImageView)view);
+                NetUtil.getInstance().getPhoto(result.get(position).getImageUrl(), (ImageView) view);
             }
         });
     }

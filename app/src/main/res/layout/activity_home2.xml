@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,40 +12,65 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.stx.xhb.xbanner.XBanner
-            android:id="@+id/xbanner"
+        <com.bw.combatsample.view.widget.MyTitleView
+            android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_200"></com.stx.xhb.xbanner.XBanner>
+            android:layout_height="wrap_content"></com.bw.combatsample.view.widget.MyTitleView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="热销新品" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_rxxp"
+        <com.bw.combatsample.view.widget.FlowLayout
+            android:id="@+id/flow"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:visibility="gone"></com.bw.combatsample.view.widget.FlowLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="魔力时尚" />
+        <com.bw.combatsample.view.widget.MyView
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_200"
+            android:background="@color/colorPrimary"
+            android:visibility="gone" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_mlss"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="品质生活" />
+            <com.stx.xhb.xbanner.XBanner
+                android:id="@+id/xbanner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_200"></com.stx.xhb.xbanner.XBanner>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_pzsh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热销新品" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_rxxp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="魔力时尚" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_mlss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="品质生活" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_pzsh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
     </LinearLayout>
 
-</ScrollView>
+
+</RelativeLayout>
