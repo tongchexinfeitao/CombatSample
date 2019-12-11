@@ -31,7 +31,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
     private RecyclerView recyclerViewPzsh;
     private XBanner xBanner;
     private FlowLayout flowLayout;
-    private MyTitleView mySearchView;
+    private MyTitleView myTitleView;
 
     @Override
     protected HomePresenter providePresenter() {
@@ -45,11 +45,11 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
 
     @Override
     protected void initView() {
-        mySearchView = findViewById(R.id.search);
+        myTitleView = findViewById(R.id.search);
         //支持搜索
-        mySearchView.setSearchEnable(false);
+        myTitleView.setSearchEnable(false);
 
-        mySearchView.setOnSearchListener(new MyTitleView.OnSearchListener() {
+        myTitleView.setOnSearchListener(new MyTitleView.OnSearchListener() {
             @Override
             public void onSearch(String searchContent) {
                 Toast.makeText(HomeActivity.this, searchContent, Toast.LENGTH_SHORT).show();
