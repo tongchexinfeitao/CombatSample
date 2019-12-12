@@ -24,7 +24,8 @@
         <com.bw.combatsample.view.widget.FlowLayout
             android:id="@+id/flow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.bw.combatsample.view.widget.FlowLayout>
+            android:layout_height="match_parent"
+            app:myTagColor="@color/colorAccent"></com.bw.combatsample.view.widget.FlowLayout>
 
         <com.bw.combatsample.view.widget.MyView
             android:layout_width="@dimen/dp_200"

@@ -20,6 +20,9 @@ public class FlowLayout extends ViewGroup {
         super(context, attrs);
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         screenWid = displayMetrics.widthPixels;
+
+
+
     }
 
     // TODO: 2019/12/10 基于的前提：

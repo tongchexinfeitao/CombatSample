@@ -162,22 +162,22 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements IHomeCo
         //设置按照参数的 先后顺序执行
 //        animatorSet.playSequentially(scaleX, scaleY);
         //开始执行动画
-//        animatorSet.start();
+        animatorSet.start();
 
 
 
         //值动画  也可以实现某个对象的属性变化，  ObjectAnimator extends ValueAnimator
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
-        valueAnimator.setDuration(5000);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float animatedValue = (float) animation.getAnimatedValue();
-                Log.e("TAG", "animatedValue ==" + animatedValue);
-                flowLayout.setAlpha(animatedValue);
-            }
-        });
-        valueAnimator.start();
+//        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
+//        valueAnimator.setDuration(5000);
+//        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animation) {
+//                float animatedValue = (float) animation.getAnimatedValue();
+//                Log.e("TAG", "animatedValue ==" + animatedValue);
+//                flowLayout.setAlpha(animatedValue);
+//            }
+//        });
+//        valueAnimator.start();
 
 //        List<Lawyer.ResultBean.RxxpBean.CommodityListBean> rxxp = lawyer.getResult().getRxxp().getCommodityList();
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

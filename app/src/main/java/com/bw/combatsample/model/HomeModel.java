@@ -10,7 +10,7 @@ public class HomeModel implements IHomeContract.IModel {
 
     @Override
     public void getHomeData(String path, final IModelCallback iModelCallback) {
-        String httpUrl = "http://172.17.8.100/small/commodity/v1/commodityList";
+        String httpUrl = "http://172.17.8.100/small/commodity/v1/commodityList"+path;
         NetUtil.getInstance().getJsonGet(httpUrl, new NetUtil.MyCallback() {
             @Override
             public void onGetJson(String json) {
