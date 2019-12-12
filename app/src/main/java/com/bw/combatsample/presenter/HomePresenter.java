@@ -16,10 +16,10 @@ public class HomePresenter extends BasePresenter<IHomeContract.IView> implements
         homeModel = new HomeModel();
     }
 
-    @Override
-    public void getHomeData() {
 
-        homeModel.getHomeData(new IHomeContract.IModel.IModelCallback() {
+    @Override
+    public void getHomeData(String path) {
+        homeModel.getHomeData(path,new IHomeContract.IModel.IModelCallback() {
             @Override
             public void onHomeSuccess(Lawyer lawyer) {
                 view.onHomeSuccess(lawyer);
@@ -41,6 +41,4 @@ public class HomePresenter extends BasePresenter<IHomeContract.IView> implements
             }
         });
     }
-
-
 }

@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 public class HomeModel implements IHomeContract.IModel {
 
     @Override
-    public void getHomeData(final IModelCallback iModelCallback) {
+    public void getHomeData(String path, final IModelCallback iModelCallback) {
         String httpUrl = "http://172.17.8.100/small/commodity/v1/commodityList";
         NetUtil.getInstance().getJsonGet(httpUrl, new NetUtil.MyCallback() {
             @Override

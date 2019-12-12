@@ -13,18 +13,18 @@
         android:orientation="vertical">
 
         <com.bw.combatsample.view.widget.MyTitleView
-            app:searchEnable="true"
-            app:myTextColor="@color/colorAccent"
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:myHint="红米"></com.bw.combatsample.view.widget.MyTitleView>
+            android:visibility="gone"
+            app:myHint="红米"
+            app:myTextColor="@color/colorAccent"
+            app:searchEnable="true"></com.bw.combatsample.view.widget.MyTitleView>
 
         <com.bw.combatsample.view.widget.FlowLayout
             android:id="@+id/flow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"></com.bw.combatsample.view.widget.FlowLayout>
+            android:layout_height="match_parent"></com.bw.combatsample.view.widget.FlowLayout>
 
         <com.bw.combatsample.view.widget.MyView
             android:layout_width="@dimen/dp_200"

@@ -20,11 +20,12 @@ public interface IHomeContract {
     }
 
     interface IPresenter {
-        void getHomeData();
+        void getHomeData(String path);
     }
 
     interface IModel {
-        void getHomeData(IModelCallback iModelCallback);
+        void getHomeData(String path,IModelCallback iModelCallback);
+
 
         //m层通知p层结果用的
         interface IModelCallback {
